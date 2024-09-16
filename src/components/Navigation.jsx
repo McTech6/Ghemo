@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Styles from './styles/navigation.module.scss'
+import {useNavigate} from 'react-router-dom'
 import { IoIosSearch, IoIosMenu } from "react-icons/io";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
@@ -22,6 +23,14 @@ export default function Navigation() {
         };
     }, []);
 
+    //Since div is used, i want to create a personal navigate
+    const navigate = useNavigate()
+
+    const handleNavigate = (path)=>{
+        navigate(path)
+           
+    }
+
     return (
         <div className={Styles.wrapper}>
             <div className={Styles.container}>
@@ -39,11 +48,11 @@ export default function Navigation() {
                         <img src={logoLink} alt="logo" />
                     </div>
                     <div className={Styles.links}>
-                        <div>Home</div>
-                        <div>News</div>
-                        <div>Registration</div>
-                        <div>Course</div>
-                        <div>About us</div>
+                        <div onClick={()=> handleNavigate('/')}>Home</div>
+                        <div  onClick={()=> handleNavigate('/news')}>News</div>
+                        <div  onClick={()=> handleNavigate('/registration')}>Registration</div>
+                        <div onClick={()=> handleNavigate('/course')}>Course</div>
+                        <div onClick={()=> handleNavigate('/about')}>About us</div>
                         <div className={Styles.search} onClick={() => setIsSearchMenu(true)}>
                             <IoIosSearch />
                         </div>
@@ -64,7 +73,7 @@ export default function Navigation() {
                 <div className={Styles.alt_nav}>
                     <div className={Styles.content}>
                         <div className={Styles.links}>
-                            <div>Home</div>
+                            <div onClick={()=> handleNavigate('/')}>Home</div>
                             <div>News</div>
                             <div>Registration</div>
                             <div>Course</div>
